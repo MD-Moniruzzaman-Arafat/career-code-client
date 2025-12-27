@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <main className="h-screen container mx-auto">
+      <main className="min-h-screen container mx-auto">
         <Outlet />
       </main>
       <Footer />

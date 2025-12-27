@@ -51,7 +51,7 @@ export default function Navbar() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Item 3</a>
+              <NavLink to={'/'}>Home</NavLink>
             </li>
           </ul>
         </div>
