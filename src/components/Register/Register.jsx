@@ -1,3 +1,4 @@
+import { updateProfile } from 'firebase/auth';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { Bounce, toast } from 'react-toastify';
@@ -47,6 +48,12 @@ export default function Register() {
     try {
       const response = await createUser(formData.email, formData.password);
       const registeredUser = response.user;
+      if (registeredUser) {
+        await updateProfile(registeredUser, {
+          displayName: formData.name,
+          photoURL: formData.photoUrl,
+        });
+      }
       if (registeredUser) {
         navigation('/login-page');
       }
