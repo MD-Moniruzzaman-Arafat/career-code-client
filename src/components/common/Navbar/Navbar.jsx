@@ -1,9 +1,19 @@
 import { NavLink } from 'react-router';
+import useAuth from '../../../hook/useAuth';
+import Menu from './Menu';
 
 export default function Navbar() {
+  const { user, logoutUser } = useAuth();
+  const handleLogOutUser = async () => {
+    try {
+      await logoutUser();
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
   return (
     <>
-      <div className="navbar bg-base-100 shadow-sm">
+      <div className="container mx-auto navbar bg-base-100 shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -27,38 +37,54 @@ export default function Navbar() {
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+              <Menu />
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">CAREER-CODE</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            <li>
-              <NavLink to={'/'}>Home</NavLink>
-            </li>
+            <Menu />
           </ul>
         </div>
         <div className="navbar-end">
-          <NavLink to={'/login-page'} className="btn">
-            Login
-          </NavLink>
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex="-1"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              >
+                <li>
+                  <a className="justify-between">
+                    {user?.displayName}
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <p onClick={handleLogOutUser}>Logout</p>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <NavLink to={'/login-page'} className="btn">
+              Login
+            </NavLink>
+          )}
         </div>
       </div>
     </>
