@@ -9,8 +9,7 @@ export default function Login() {
     password: '',
   });
   const navigation = useNavigate();
-  const { user, setUser, authError, setAuthError, logInUser, googleLogin } =
-    useAuth();
+  const { authError, setAuthError, logInUser, googleLogin } = useAuth();
   const errorNotify = () =>
     toast.error(authError, {
       position: 'top-right',

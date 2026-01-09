@@ -12,7 +12,7 @@ export default function Register() {
     password: '',
   });
   const navigation = useNavigate();
-  const { user, setUser, authError, setAuthError, createUser } = useAuth();
+  const { authError, setAuthError, createUser, googleLogin } = useAuth();
   const errorNotify = () =>
     toast.error(authError, {
       position: 'top-right',
@@ -27,6 +27,18 @@ export default function Register() {
     });
   const successNotify = () =>
     toast.success('Registration successful!', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+      transition: Bounce,
+    });
+  const successNotifyGoogle = () =>
+    toast.success('Google Login successful!', {
       position: 'top-right',
       autoClose: 5000,
       hideProgressBar: false,
@@ -59,6 +71,19 @@ export default function Register() {
       }
       console.log(registeredUser);
       successNotify();
+    } catch (error) {
+      setAuthError(error.message);
+      errorNotify();
+    }
+  };
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await googleLogin();
+      const googleUser = response.user;
+      if (googleUser) {
+        navigation('/');
+      }
+      successNotifyGoogle();
     } catch (error) {
       setAuthError(error.message);
       errorNotify();
@@ -116,7 +141,10 @@ export default function Register() {
               don't have an account? <Link to="/login-page">Login</Link>
             </small>
           </div>
-          <button className="btn bg-white text-black border-[#e5e5e5]">
+          <button
+            onClick={handleGoogleLogin}
+            className="btn bg-white text-black border-[#e5e5e5]"
+          >
             <svg
               aria-label="Google logo"
               width="16"
