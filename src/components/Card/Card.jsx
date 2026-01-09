@@ -1,3 +1,5 @@
+import { Link } from 'react-router';
+
 export default function Card({ job }) {
   return (
     <>
@@ -22,7 +24,9 @@ export default function Card({ job }) {
               </div>
             ))}
           </div>
-          <button className="btn btn-active mt-5">Details</button>
+          <Link to={`/jobs/${job._id}`} className="btn btn-active mt-5">
+            Details
+          </Link>
         </div>
       </div>
     </>
