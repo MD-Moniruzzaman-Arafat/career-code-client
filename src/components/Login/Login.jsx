@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { Bounce, toast } from 'react-toastify';
 import useAuth from '../../hook/useAuth';
 
@@ -9,6 +9,8 @@ export default function Login() {
     password: '',
   });
   const navigation = useNavigate();
+  const location = useLocation();
+  console.log('Login location:', location);
   const { authError, setAuthError, logInUser, googleLogin } = useAuth();
   const errorNotify = () =>
     toast.error(authError, {
@@ -58,7 +60,7 @@ export default function Login() {
       const response = await logInUser(formData.email, formData.password);
       const loginUser = response.user;
       if (loginUser) {
-        navigation('/');
+        navigation(location.state ? location.state : '/');
       }
       console.log(loginUser);
       successNotify();
@@ -72,7 +74,7 @@ export default function Login() {
       const response = await googleLogin();
       const googleUser = response.user;
       if (googleUser) {
-        navigation('/');
+        navigation(location.state ? location.state : '/');
       }
       successNotifyGoogle();
     } catch (error) {

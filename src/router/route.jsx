@@ -5,6 +5,7 @@ import JobsDetailsPage from '../page/JobsDetailsPage';
 import LoginPage from '../page/LoginPage';
 import RegisterPage from '../page/RegisterPage';
 import { getSingleJobs } from '../utils/api';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   {
@@ -14,7 +15,11 @@ export const router = createBrowserRouter([
       { index: true, Component: HomePage },
       {
         path: '/jobs/:id',
-        element: <JobsDetailsPage />,
+        element: (
+          <PrivateRoute>
+            <JobsDetailsPage />
+          </PrivateRoute>
+        ),
         loader: ({ params }) => getSingleJobs(params.id),
       },
     ],
