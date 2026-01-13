@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 
 export default function JobsDetailsPage() {
   const jobDetails = useLoaderData();
@@ -56,6 +56,12 @@ export default function JobsDetailsPage() {
         <span className="font-bold">Description: </span>
         {jobDetails.description}
       </h1>
+      <Link
+        to={`/apply-form/${jobDetails._id}`}
+        className="bg-blue-500 text-white btn my-5"
+      >
+        Apply
+      </Link>
     </>
   );
 }
