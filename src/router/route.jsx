@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router';
 import App from '../App';
+import AddJobPage from '../page/AddJobPage';
 import ApplyFormPage from '../page/ApplyFormPage';
 import HomePage from '../page/HomePage';
 import JobsDetailsPage from '../page/JobsDetailsPage';
@@ -37,6 +38,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyApplyJobListPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/job-post',
+        element: (
+          <PrivateRoute>
+            <AddJobPage />
           </PrivateRoute>
         ),
       },

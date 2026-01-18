@@ -13,6 +13,9 @@ export default function Menu() {
           <li>
             <NavLink to={'/my-apply-job'}>My Apply job list</NavLink>
           </li>
+          <li>
+            <NavLink to={'/job-post'}>Job Post</NavLink>
+          </li>
         </>
       ) : (
         ''

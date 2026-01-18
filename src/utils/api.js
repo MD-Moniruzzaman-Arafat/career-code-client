@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+export const addJob = async (jobInfo) => {
+  const response = await axios.post(`http://localhost:5000/jobs`, jobInfo);
+  return response.data.data;
+};
+
 export const getAllJobs = async () => {
   const response = await axios.get(`http://localhost:5000/jobs`);
   return response.data.data;
