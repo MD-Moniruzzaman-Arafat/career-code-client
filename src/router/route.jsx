@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import App from '../App';
 import AddJobPage from '../page/AddJobPage';
 import ApplyFormPage from '../page/ApplyFormPage';
+import EditJobInfoPage from '../page/EditJobInfoPage';
 import HomePage from '../page/HomePage';
 import JobsDetailsPage from '../page/JobsDetailsPage';
 import LoginPage from '../page/LoginPage';
@@ -57,6 +58,15 @@ export const router = createBrowserRouter([
             <MyPostedJobListPage />
           </PrivateRoute>
         ),
+      },
+      {
+        path: '/edit-my-posted-jobs/:id',
+        element: (
+          <PrivateRoute>
+            <EditJobInfoPage />
+          </PrivateRoute>
+        ),
+        loader: async ({ params }) => await getSingleJobs(params.id),
       },
     ],
   },

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
 import { Bounce, toast } from 'react-toastify';
 import useAuth from '../hook/useAuth';
 import { deleteMyPostedJob, getAllJobs } from '../utils/api';
@@ -68,9 +69,12 @@ export default function MyPostedJobListPage() {
                     >
                       Delete
                     </button>
-                    <button className="btn bg-[blue] text-white btn-sm ml-2">
+                    <Link
+                      to={`/edit-my-posted-jobs/${job._id}`}
+                      className="btn bg-[blue] text-white btn-sm ml-2"
+                    >
                       Edit
-                    </button>
+                    </Link>
                   </td>
                 </tr>
               ))}

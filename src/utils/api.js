@@ -34,3 +34,11 @@ export const deleteMyPostedJob = async (id) => {
   const response = await axios.delete(`http://localhost:5000/jobs/${id}`);
   return response.data.data;
 };
+
+export const editMyPostedJob = async (id, updatedJobInfo) => {
+  const response = await axios.patch(
+    `http://localhost:5000/jobs/${id}`,
+    updatedJobInfo
+  );
+  return response.data.data;
+};
