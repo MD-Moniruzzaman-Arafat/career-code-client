@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { Bounce, toast } from 'react-toastify';
+import useAuth from '../../hook/useAuth';
 import { addJob } from '../../utils/api';
 
 export default function AddJobForm() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     location: '',
@@ -18,6 +22,7 @@ export default function AddJobForm() {
     hr_email: '',
     hr_name: '',
     companyLogo: '',
+    createdMail: user?.email || '',
   });
 
   const successNotify = () =>
@@ -44,6 +49,7 @@ export default function AddJobForm() {
     const res = await addJob(formData);
     if (res) {
       successNotify();
+      navigate('/my-posted-jobs');
     }
     console.log(res);
   };

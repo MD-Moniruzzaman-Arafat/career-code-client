@@ -6,6 +6,7 @@ import HomePage from '../page/HomePage';
 import JobsDetailsPage from '../page/JobsDetailsPage';
 import LoginPage from '../page/LoginPage';
 import MyApplyJobListPage from '../page/MyApplyJobListPage';
+import MyPostedJobListPage from '../page/MyPostedJobListPage';
 import RegisterPage from '../page/RegisterPage';
 import { getSingleJobs } from '../utils/api';
 import PrivateRoute from './PrivateRoute';
@@ -46,6 +47,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddJobPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/my-posted-jobs',
+        element: (
+          <PrivateRoute>
+            <MyPostedJobListPage />
           </PrivateRoute>
         ),
       },
