@@ -11,7 +11,9 @@ export const getAllJobs = async () => {
 };
 
 export const getSingleJobs = async (id) => {
-  const response = await axios.get(`http://localhost:5000/jobs/${id}`);
+  const response = await axios.get(`http://localhost:5000/jobs/${id}`, {
+    withCredentials: true,
+  });
   return response.data.data;
 };
 
@@ -41,4 +43,13 @@ export const editMyPostedJob = async (id, updatedJobInfo) => {
     updatedJobInfo
   );
   return response.data.data;
+};
+
+export const jwtToken = async (email) => {
+  const response = await axios.post(
+    `http://localhost:5000/jwt`,
+    { email },
+    { withCredentials: true }
+  );
+  return response.data.token;
 };
