@@ -1,25 +1,33 @@
 import axios from 'axios';
 
 export const addJob = async (jobInfo) => {
-  const response = await axios.post(`http://localhost:5000/jobs`, jobInfo);
+  const response = await axios.post(
+    `https://carrer-code-server-flame.vercel.app/jobs`,
+    jobInfo
+  );
   return response.data.data;
 };
 
 export const getAllJobs = async () => {
-  const response = await axios.get(`http://localhost:5000/jobs`);
+  const response = await axios.get(
+    `https://carrer-code-server-flame.vercel.app/jobs`
+  );
   return response.data.data;
 };
 
 export const getSingleJobs = async (id) => {
-  const response = await axios.get(`http://localhost:5000/jobs/${id}`, {
-    withCredentials: true,
-  });
+  const response = await axios.get(
+    `https://carrer-code-server-flame.vercel.app/jobs/${id}`,
+    {
+      withCredentials: true,
+    }
+  );
   return response.data.data;
 };
 
 export const applyForJob = async (applicationData) => {
   const response = await axios.post(
-    `http://localhost:5000/applyJob`,
+    `https://carrer-code-server-flame.vercel.app/applyJob`,
     applicationData
   );
   return response.data.data;
@@ -27,19 +35,21 @@ export const applyForJob = async (applicationData) => {
 
 export const getMyApplications = async (userEmail) => {
   const response = await axios.get(
-    `http://localhost:5000/applyJob?email=${userEmail}`
+    `https://carrer-code-server-flame.vercel.app/applyJob?email=${userEmail}`
   );
   return response.data.data;
 };
 
 export const deleteMyPostedJob = async (id) => {
-  const response = await axios.delete(`http://localhost:5000/jobs/${id}`);
+  const response = await axios.delete(
+    `https://carrer-code-server-flame.vercel.app/jobs/${id}`
+  );
   return response.data.data;
 };
 
 export const editMyPostedJob = async (id, updatedJobInfo) => {
   const response = await axios.patch(
-    `http://localhost:5000/jobs/${id}`,
+    `https://carrer-code-server-flame.vercel.app/jobs/${id}`,
     updatedJobInfo
   );
   return response.data.data;
@@ -47,7 +57,7 @@ export const editMyPostedJob = async (id, updatedJobInfo) => {
 
 export const jwtToken = async (email) => {
   const response = await axios.post(
-    `http://localhost:5000/jwt`,
+    `https://carrer-code-server-flame.vercel.app/jwt`,
     { email },
     { withCredentials: true }
   );

@@ -37,14 +37,16 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-      const res = await jwtToken(currentUser.email);
-      console.log('JWT Token Response:', res);
+      if (currentUser?.email) {
+        const res = await jwtToken(currentUser?.email);
+        console.log('JWT Token Response:', res);
+      }
       // localStorage.setItem('access-token', res);
       // console.log('Auth State Changed:', currentUser);
       currentUser ? setLoading(false) : setLoading(false);
     });
     return () => unsubscribe();
-  });
+  }, []);
 
   const authInfo = {
     setLoading,
