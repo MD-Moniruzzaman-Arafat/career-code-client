@@ -25,7 +25,7 @@ export const router = createBrowserRouter([
             <JobsDetailsPage />
           </PrivateRoute>
         ),
-        loader: ({ params }) => getSingleJobs(params.id),
+        // loader: ({ params }) => getSingleJobs(params.id),
       },
       {
         path: '/apply-form/:id',

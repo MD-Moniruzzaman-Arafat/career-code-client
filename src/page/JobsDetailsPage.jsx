@@ -1,63 +1,75 @@
-import { Link, useLoaderData } from 'react-router';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router';
+import { getSingleJobs } from '../utils/api';
 
 export default function JobsDetailsPage() {
-  const jobDetails = useLoaderData();
+  const [jobDetails, setJobDetails] = useState(null);
+  const id = useParams();
+  console.log(id.id);
+  useEffect(() => {
+    const fetchJobDetails = async () => {
+      const data = await getSingleJobs(id.id);
+      setJobDetails(data);
+      console.log('Fetched Job Details:', data);
+    };
+    fetchJobDetails();
+  }, [id.id]);
   console.log(jobDetails);
   return (
     <>
       <div className="p-8 border rounded-lg shadow-md my-5">
-        <img src={jobDetails.company_logo} alt={jobDetails.company} />
+        <img src={jobDetails?.company_logo} alt={jobDetails?.company} />
       </div>
       <h1 className="text-2xl">
         <span className="font-bold">Status: </span>
-        {jobDetails.status}
+        {jobDetails?.status}
       </h1>
       <h1 className="text-2xl">
         <span className="font-bold">Title: </span>
-        {jobDetails.title}
+        {jobDetails?.title}
       </h1>
       <h1 className="text-2xl">
         <span className="font-bold">Company: </span>
-        {jobDetails.company}
+        {jobDetails?.company}
       </h1>
       <h1 className="text-2xl">
         <span className="font-bold">Category: </span>
-        {jobDetails.category}
+        {jobDetails?.category}
       </h1>
       <h1 className="text-2xl">
         <span className="font-bold">HR Name: </span>
-        {jobDetails.hr_name}
+        {jobDetails?.hr_name}
       </h1>
       <h1 className="text-2xl">
         <span className="font-bold">HR Email: </span>
-        {jobDetails.hr_email}
+        {jobDetails?.hr_email}
       </h1>
       <h1 className="text-2xl">
         <span className="font-bold">Job Type: </span>
-        {jobDetails.jobType}
+        {jobDetails?.jobType}
       </h1>
       <h1 className="text-2xl">
         <span className="font-bold">Location: </span>
-        {jobDetails.location}
+        {jobDetails?.location}
       </h1>
       <h1 className="text-2xl">
         <span className="font-bold">Requirements: </span>
-        {jobDetails.requirements.join(', ')}
+        {jobDetails?.requirements.join(', ')}
       </h1>
       <h1 className="text-2xl">
         <span className="font-bold">Responsibilities: </span>
-        {jobDetails.responsibilities.join(', ')}
+        {jobDetails?.responsibilities.join(', ')}
       </h1>
       <h1 className="text-2xl">
         <span className="font-bold">salaryRange: </span>
-        {jobDetails.salaryRange.min} BDT - {jobDetails.salaryRange.max} BDT
+        {jobDetails?.salaryRange.min} BDT - {jobDetails?.salaryRange.max} BDT
       </h1>
       <h1 className="text-2xl">
         <span className="font-bold">Description: </span>
-        {jobDetails.description}
+        {jobDetails?.description}
       </h1>
       <Link
-        to={`/apply-form/${jobDetails._id}`}
+        to={`/apply-form/${jobDetails?._id}`}
         className="bg-blue-500 text-white btn my-5"
       >
         Apply
